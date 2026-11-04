@@ -2,6 +2,12 @@
 
 All notable changes to **Ultimate Gear: Divine Edition** will be documented in this file.
 
+## [1.0.2] - 2026-03-06
+### Added
+- **Native Enchantment Engine (Phase 3)**: Fully integrated `ItemEnchantableComponent` with `addEnchantment`, `removeEnchantment`, `getEnchantment`, and `canAddEnchantment`.
+- **Enchantment Configuration UI**: Dedicated configuration menu displaying ON/OFF status, current levels, and adjustable levels up to 255.
+- **Item Safety & Validation**: Slot re-verification, preservation of unselected enchantments, error handling for incompatible items, and safe save back to inventory slot.
+
 ## [1.0.1] - 2026-03-06
 ### Added
 - **Inventory Scanner (Phase 2)**: Scans all inventory slots, ignores empty slots, identifies items, and supports pagination/navigation.

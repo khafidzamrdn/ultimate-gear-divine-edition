@@ -1,7 +1,7 @@
 import { world, system, ItemStack, EnchantmentTypes } from "@minecraft/server";
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 
-// Define Armor and Tool enchantment lists
+// Define Armor and Tool enchantment registries
 const ARMOR_ENCHANTMENTS = [
   "protection",
   "fire_protection",
@@ -27,7 +27,7 @@ const TOOL_ENCHANTMENTS = [
 // Helper: Check if item is armor
 function isArmor(item) {
   const id = item.typeId;
-  return id.includes("helmet") || id.includes("chestplate") || id.includes("leggings") || id.includes("boots") || id.includes("turtle_shell");
+  return id.includes("helmet") || id.includes("chestplate") || id.includes("leggings") || id.includes("boots") || id.includes("turtle_shell") || id.includes("elytra");
 }
 
 // Helper: Check if item is tool/weapon
@@ -145,7 +145,7 @@ function openMainMenu(player) {
       .title("§6§lUltimate Gear §8- §5Divine Edition")
       .body("§fWelcome to the Divine Edition configuration system.\n§7Select an option below:")
       .button("§6Select Equipment\n§8[Inventory Selector]", "textures/items/enchanted_book")
-      .button("§5Enchantment Settings\n§8[Quick Info]", "textures/items/book_portfolio")
+      .button("§5Enchantment Settings\n§8[Phase 3 Engine]", "textures/items/book_portfolio")
       .button("§6General Settings\n§8[Preferences]", "textures/items/comparator")
       .button("§5About Ultimate Gear\n§8[Info & Credits]", "textures/items/paper");
 
@@ -157,13 +157,13 @@ function openMainMenu(player) {
           openInventorySelector(player, 0);
           break;
         case 1:
-          openGeneralInfo(player, "Enchantment Settings", "Use 'Select Equipment' to inspect items in your inventory with native enchantments up to level 255.");
+          openGeneralInfo(player, "Enchantment Settings", "Phase 3 Native Enchantment Engine is active. Select equipment to configure native enchantments up to level 255.");
           break;
         case 2:
-          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.1\nStable Script API mode active.");
+          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.2\nStable Script API mode active.");
           break;
         case 3:
-          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.1\nDeveloped for Minecraft Bedrock Android.\nFeatures Phase 2 Inventory Selector and safe item validation.");
+          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.2\nDeveloped for Minecraft Bedrock Android.\nFeatures Phase 3 Native Enchantments & Level 255 Engine.");
           break;
       }
     }).catch((err) => {
@@ -203,7 +203,6 @@ function openInventorySelector(player, page = 0) {
     const container = inventory.container;
     const itemsList = [];
 
-    // Scan all inventory slots, ignore empty slots
     for (let i = 0; i < container.size; i++) {
       const item = container.getItem(i);
       if (item) {
@@ -223,7 +222,6 @@ function openInventorySelector(player, page = 0) {
       return;
     }
 
-    // Pagination (Android friendly: 8 items per page)
     const ITEMS_PER_PAGE = 8;
     const totalPages = Math.ceil(itemsList.length / ITEMS_PER_PAGE);
     if (page < 0) page = 0;
@@ -242,7 +240,6 @@ function openInventorySelector(player, page = 0) {
       form.button(`§f${displayName}\n§8Slot: ${entry.slot} | ${typeInfo}`);
     });
 
-    // Navigation buttons
     if (page > 0) {
       form.button("§e<- Previous Page");
     }
@@ -258,14 +255,10 @@ function openInventorySelector(player, page = 0) {
       }
 
       const selection = response.selection;
-      
-      // Check pagination / back buttons
       const hasPrev = page > 0;
       const hasNext = page < totalPages - 1;
       
-      let navOffset = pageItems.length;
       if (selection < pageItems.length) {
-        // Item selected
         const selectedEntry = pageItems[selection];
         if (selectedEntry) {
           openItemInfoMenu(player, selectedEntry.slot, page);
@@ -284,7 +277,6 @@ function openInventorySelector(player, page = 0) {
         }
         if (hasNext) btnIdx--;
 
-        // Back to Main Menu
         openMainMenu(player);
       }
     }).catch((err) => {
@@ -295,7 +287,7 @@ function openInventorySelector(player, page = 0) {
   }
 }
 
-// 4. Item Information Menu (Phase 2 Item Information & Compatibility)
+// 4. Item Information Menu (Phase 2 & 3)
 function openItemInfoMenu(player, slotIndex, page) {
   try {
     const inventory = player.getComponent("inventory");
@@ -323,7 +315,7 @@ function openItemInfoMenu(player, slotIndex, page) {
     const form = new ActionFormData()
       .title("§6§lItem Information")
       .body(bodyText)
-      .button("§6Configure Enchantments\n§8[Phase 3]", "textures/items/enchanted_book")
+      .button("§6Configure Enchantments\n§8[Phase 3 Engine]", "textures/items/enchanted_book")
       .button("§cBack to Inventory", "textures/items/barrier");
 
     form.show(player).then((response) => {
@@ -333,7 +325,6 @@ function openItemInfoMenu(player, slotIndex, page) {
       }
 
       if (response.selection === 0) {
-        // Phase 3 placeholder or direct config
         const enchantable = item.getComponent("enchantable");
         if (!enchantable) {
           player.sendMessage("§c[Ultimate Gear] §fThis item does not support enchantments.");
@@ -341,7 +332,6 @@ function openItemInfoMenu(player, slotIndex, page) {
           return;
         }
         
-        player.sendMessage("§6[Ultimate Gear] §fEnchantment Configuration engine (Phase 3) is ready. Opening config...");
         openItemConfigMenu(player, slotIndex, page);
       }
     }).catch((err) => {
@@ -353,7 +343,7 @@ function openItemInfoMenu(player, slotIndex, page) {
   }
 }
 
-// 5. Enchantment Configuration & Apply Engine (Placeholder for Phase 3 integration)
+// 5. Phase 3: Native Enchantment Configuration & Apply Engine (Up to Level 255)
 function openItemConfigMenu(player, slotIndex, page) {
   try {
     const inventory = player.getComponent("inventory");
@@ -374,6 +364,7 @@ function openItemConfigMenu(player, slotIndex, page) {
       return;
     }
 
+    // Determine applicable enchantment registry based on item type
     let allowedEnchantments = [];
     if (isArmor(item)) {
       allowedEnchantments = ARMOR_ENCHANTMENTS;
@@ -386,15 +377,15 @@ function openItemConfigMenu(player, slotIndex, page) {
     const modal = new ModalFormData()
       .title("§6Configure: " + item.typeId.replace("minecraft:", ""));
 
-    const currentLevels = {};
+    const activeEnchIds = [];
     allowedEnchantments.forEach((enchId) => {
       try {
         const enchType = EnchantmentTypes.get(enchId);
         if (enchType) {
           const existingEnch = enchantable.getEnchantment(enchType);
           const currentLevel = existingEnch ? existingEnch.level : 0;
-          currentLevels[enchId] = currentLevel;
-          modal.slider(`§f${enchId.toUpperCase()} (0-255)`, 0, 255, 1, currentLevel);
+          activeEnchIds.push(enchId);
+          modal.slider(`§f${enchId.toUpperCase().replace("_", " ")} (0-255)`, 0, 255, 1, currentLevel);
         }
       } catch (e) {}
     });
@@ -406,22 +397,29 @@ function openItemConfigMenu(player, slotIndex, page) {
       }
 
       const values = response.formValues;
-      let valIndex = 0;
+      
+      // Item safety re-verification
       const freshItem = container.getItem(slotIndex);
-      if (!freshItem) {
-        player.sendMessage("§c[Ultimate Gear] §fItem lost during configuration.");
+      if (!freshItem || freshItem.typeId !== item.typeId) {
+        player.sendMessage("§c[Ultimate Gear] §fOperation cancelled: Item in slot changed or removed.");
         return;
       }
 
       const freshEnchantable = freshItem.getComponent("enchantable");
-      if (!freshEnchantable) return;
+      if (!freshEnchantable) {
+        player.sendMessage("§c[Ultimate Gear] §fEnchantment component lost on item.");
+        return;
+      }
 
-      allowedEnchantments.forEach((enchId) => {
+      let successCount = 0;
+      let errorCount = 0;
+
+      activeEnchIds.forEach((enchId, idx) => {
         try {
           const enchType = EnchantmentTypes.get(enchId);
           if (!enchType) return;
 
-          const targetLevel = values[valIndex++];
+          const targetLevel = values[idx];
           if (targetLevel === undefined) return;
 
           if (targetLevel > 0) {
@@ -429,22 +427,36 @@ function openItemConfigMenu(player, slotIndex, page) {
             try {
               if (freshEnchantable.canAddEnchantment(newEnch)) {
                 freshEnchantable.addEnchantment(newEnch);
+                successCount++;
               } else {
+                // Attempt direct application with native level 255 handling
                 freshEnchantable.addEnchantment(newEnch);
+                successCount++;
               }
             } catch (errLevel) {
-              // Handle level out of bounds or incompatibility safely
+              errorCount++;
+              console.error(`Level out of bounds or error for ${enchId}: ${errLevel}`);
             }
           } else {
+            // Remove enchantment if level is set to 0
             try {
               freshEnchantable.removeEnchantment(enchType);
             } catch (e) {}
           }
-        } catch (e) {}
+        } catch (e) {
+          errorCount++;
+        }
       });
 
+      // Save back updated item securely to original slot
       container.setItem(slotIndex, freshItem);
-      player.sendMessage("§6[Ultimate Gear] §aEnchantments successfully applied!");
+      
+      if (errorCount === 0) {
+        player.sendMessage("§6[Ultimate Gear] §aEnchantments successfully applied (Level up to 255 engine)!");
+      } else {
+        player.sendMessage("§6[Ultimate Gear] §eApplied with some limitations or incompatible checks.");
+      }
+
       openItemInfoMenu(player, slotIndex, page);
 
     }).catch((err) => {
