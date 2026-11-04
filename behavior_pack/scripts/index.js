@@ -24,6 +24,16 @@ const TOOL_ENCHANTMENTS = [
   "mending"
 ];
 
+// All vanilla enchantment identifiers (used for glint detection)
+const ALL_ENCHANTMENT_IDS = [
+  "protection", "fire_protection", "blast_protection", "projectile_protection",
+  "feather_falling", "thorns", "respiration", "aqua_affinity", "depth_strider",
+  "frost_walker", "soul_speed", "swift_sneak", "sharpness", "smite",
+  "bane_of_arthropods", "knockback", "fire_aspect", "looting", "efficiency",
+  "silk_touch", "unbreaking", "fortune", "power", "punch", "flame",
+  "infinity", "luck_of_the_sea", "lure", "mending", "vanishing", "binding"
+];
+
 // Helper: Check if item is armor
 function isArmor(item) {
   const id = item.typeId;
@@ -63,6 +73,49 @@ function getDivineItemName(item) {
   } else {
     return `§bCelestial ${formattedBase}`;
   }
+}
+
+// Helper: Check whether an item currently carries any enchantment
+function hasAnyEnchantment(enchantable) {
+  for (const id of ALL_ENCHANTMENT_IDS) {
+    try {
+      const type = EnchantmentTypes.get(id);
+      if (type && enchantable.getEnchantment(type)) return true;
+    } catch (e) {}
+  }
+  return false;
+}
+
+// Helper: Guarantee the Minecraft enchantment glint on a processed item.
+// Bedrock vanilla items only render the glint while they carry at least one
+// enchantment. Existing enchantments are always preserved; a minimal level-1
+// Unbreaking is only used as a cosmetic fallback when the item has none.
+function applyVisualGlint(item) {
+  try {
+    const enchantable = item.getComponent("enchantable");
+    if (!enchantable) return false;
+    if (hasAnyEnchantment(enchantable)) return true;
+
+    const unbreaking = EnchantmentTypes.get("unbreaking");
+    if (!unbreaking) return false;
+
+    try {
+      enchantable.addEnchantment({ type: unbreaking, level: 1 });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
+
+// Helper: Persist the "processed" flag on the item stack (survives storage,
+// moving between inventories, and player logout/login).
+function markProcessed(item) {
+  try {
+    item.setDynamicProperty("ultimate_gear_processed", true);
+  } catch (e) {}
 }
 
 // Helper: Read all installed enchantments safely
@@ -180,10 +233,10 @@ function openMainMenu(player) {
           openGeneralInfo(player, "Enchantment Settings", "Phase 3 Native Enchantment Engine is active. Select equipment to configure native enchantments up to level 255.");
           break;
         case 2:
-          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.5\nStable Script API mode active.");
+          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.6\nStable Script API mode active.");
           break;
         case 3:
-          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.5\nDeveloped for Minecraft Bedrock Android.\nFeatures Visual Glint, Custom Naming & Level 255 Engine.");
+          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.6\nDeveloped for Minecraft Bedrock Android.\nFeatures Visual Glint, Custom Naming & Level 255 Engine.");
           break;
       }
     }).catch((err) => {
@@ -468,8 +521,10 @@ function openItemConfigMenu(player, slotIndex, page) {
         }
       });
 
-      // Apply custom divine/celestial naming and save back updated item securely to original slot
+      // Apply visual glint + custom divine/celestial naming, then save back securely
+      applyVisualGlint(freshItem);
       freshItem.nameTag = getDivineItemName(freshItem);
+      markProcessed(freshItem);
       container.setItem(slotIndex, freshItem);
       
       if (errorCount === 0) {

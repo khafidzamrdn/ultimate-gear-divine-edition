@@ -59,7 +59,7 @@ if (!fs.existsSync(releaseDir)) {
   fs.mkdirSync(releaseDir, { recursive: true });
 }
 
-const addonFilename = 'Ultimate-Gear-Divine-v1.0.5.mcaddon';
+const addonFilename = 'Ultimate-Gear-Divine-v1.0.6.mcaddon';
 const addonPath = path.join(releaseDir, addonFilename);
 
 // Create .mcaddon containing both behavior_pack and resource_pack directories
@@ -89,11 +89,11 @@ const sha256Content = `${sha256}  ${addonFilename}\n`;
 fs.writeFileSync(path.join(releaseDir, 'SHA256SUMS.txt'), sha256Content);
 console.log(`  [OK] SHA256: ${sha256}`);
 
-const releaseNotesContent = `# Ultimate Gear: Divine Edition v1.0.5 Release Notes
+const releaseNotesContent = `# Ultimate Gear: Divine Edition v1.0.6 Release Notes
 
 ## Overview
 - **Addon Name**: Ultimate Gear: Divine Edition
-- **Version**: v1.0.5
+- **Version**: v1.0.6
 - **Target Platform**: Minecraft Bedrock Edition (Android / Windows)
 - **File Name**: \`${addonFilename}\`
 - **File Size**: \`${fileSizeMB} MB\`
@@ -105,6 +105,11 @@ const releaseNotesContent = `# Ultimate Gear: Divine Edition v1.0.5 Release Note
 3. **Native Enchantment Engine**: Supports Armor and Tools with custom enchantment levels up to 255 using stable Script API.
 4. **Visual Enchantment & Custom Naming**: Minecraft enchanted glint and custom naming (\`Divine\` / \`Celestial\`) for processed equipment.
 5. **Pack Identity Icon**: Vanilla enchanted book representation for behavior and resource pack icons.
+
+## Bug Fixes
+1. **Divine Book Texture**: Regenerated a valid 16x16 enchanted book PNG (the previous file was truncated/corrupt).
+2. **Visual Glint**: Processed equipment now reliably renders the Minecraft enchantment glint (existing enchantments preserved; cosmetic fallback added only when none are present).
+3. **Processed State**: Item stack marker keeps the processed status across inventory moves, storage, and logout/login.
 
 ## Installation Instructions (Android)
 1. Download \`${addonFilename}\`.

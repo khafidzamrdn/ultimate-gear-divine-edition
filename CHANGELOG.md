@@ -2,6 +2,12 @@
 
 All notable changes to **Ultimate Gear: Divine Edition** will be documented in this file.
 
+## [1.0.6] - 2026-11-04
+### Fixed
+- **Divine Book Texture**: Regenerated `resource_pack/textures/items/divine_book.png` as a valid 16x16 enchanted book PNG (previous file was truncated and corrupted).
+- **Visual Glint**: Processed equipment now reliably displays the Minecraft enchanted glint. Existing enchantments are preserved and a cosmetic level-1 Unbreaking is added only when the item has none.
+- **Processed State Persistence**: Items are marked with an item-stack dynamic property so processed status survives inventory moves, storage, and logout/login.
+
 ## [1.0.5] - 2026-03-06
 ### Added
 - **Visual Enchantment (Glint)**: Minecraft enchanted glint effect applied to items successfully processed through the Divine Book without altering base stats or capabilities.
