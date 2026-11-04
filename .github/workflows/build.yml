@@ -1,0 +1,76 @@
+name: Build and Release Ultimate Gear
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate Syntax (JSON & JS)
+        run: |
+          echo "Validating JavaScript..."
+          node --check behavior_pack/scripts/index.js
+          echo "Validating JSON files..."
+          node -e "
+            const fs = require('fs');
+            const files = [
+              'behavior_pack/manifest.json',
+              'behavior_pack/items/divine_book.json',
+              'resource_pack/manifest.json'
+            ];
+            files.forEach(f => {
+              JSON.parse(fs.readFileSync(f, 'utf8'));
+              console.log('OK:', f);
+            });
+          "
+
+      - name: Package Addon (.mcpack and .mcaddon)
+        run: |
+          VERSION=${{ github.ref_name }}
+          ADDON_NAME="Ultimate-Gear-Divine-${VERSION}.mcaddon"
+          
+          echo "Creating ZIP archives for packs..."
+          cd behavior_pack && zip -r ../ultimate_gear_bp.mcpack . && cd ..
+          cd resource_pack && zip -r ../ultimate_gear_rp.mcpack . && cd ..
+          
+          echo "Creating combined .mcaddon package..."
+          zip -r "${ADDON_NAME}" behavior_pack resource_pack
+          
+          echo "Artifact created: ${ADDON_NAME}"
+          mkdir -p dist
+          mv "${ADDON_NAME}" dist/
+
+      - name: Create GitHub Release and Upload Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.mcaddon
+          name: Ultimate Gear Divine Edition ${{ github.ref_name }}
+          body: |
+            ## Ultimate Gear: Divine Edition ${{ github.ref_name }}
+            
+            Minecraft Bedrock Edition addon featuring Divine Gear, native enchantment management (up to level 255), and custom Divine Book configuration system.
+            
+            ### Installation:
+            1. Download `Ultimate-Gear-Divine-${{ github.ref_name }}.mcaddon`.
+            2. Open the file with Minecraft Bedrock on Android or PC.
+            3. Enable Behavior and Resource packs in your world settings.
+            
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md) for full changes.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
