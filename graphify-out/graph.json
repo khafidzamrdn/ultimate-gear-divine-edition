@@ -1,0 +1,24 @@
+{
+  "project": "Ultimate Gear: Divine Edition",
+  "version": "1.0.4",
+  "nodes": [
+    { "id": "BP_Manifest", "type": "Manifest", "path": "behavior_pack/manifest.json" },
+    { "id": "RP_Manifest", "type": "Manifest", "path": "resource_pack/manifest.json" },
+    { "id": "Divine_Book_Item", "type": "CustomItem", "path": "behavior_pack/items/divine_book.json" },
+    { "id": "Script_Index", "type": "ScriptModule", "path": "behavior_pack/scripts/index.js" },
+    { "id": "Texture_Mapping", "type": "Resource", "path": "resource_pack/textures/item_texture.json" },
+    { "id": "Texture_PNG", "type": "Resource", "path": "resource_pack/textures/items/divine_book.png" },
+    { "id": "Localization", "type": "Resource", "path": "resource_pack/texts/en_US.lang" },
+    { "id": "Workflow", "type": "CI_CD", "path": ".github/workflows/build.yml" }
+  ],
+  "edges": [
+    { "source": "BP_Manifest", "target": "Script_Index", "relationship": "loads_script_entry" },
+    { "source": "BP_Manifest", "target": "Divine_Book_Item", "relationship": "includes_item" },
+    { "source": "Script_Index", "target": "Divine_Book_Item", "relationship": "handles_item_use" },
+    { "source": "RP_Manifest", "target": "Texture_Mapping", "relationship": "includes_texture" },
+    { "source": "Texture_Mapping", "target": "Texture_PNG", "relationship": "maps_texture_path" },
+    { "source": "Divine_Book_Item", "target": "Texture_Mapping", "relationship": "references_icon_texture" },
+    { "source": "Workflow", "target": "BP_Manifest", "relationship": "packages_behavior_pack" },
+    { "source": "Workflow", "target": "RP_Manifest", "relationship": "packages_resource_pack" }
+  ]
+}
