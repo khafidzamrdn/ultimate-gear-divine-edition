@@ -7,7 +7,7 @@
     },
     "components": {
       "minecraft:icon": {
-        "texture": "book_enchanted"
+        "texture": "enchanted_book"
       },
       "minecraft:display_name": {
         "value": "§6Divine Book§r\n§7Ultimate Gear Menu"
