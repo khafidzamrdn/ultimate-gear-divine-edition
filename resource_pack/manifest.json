@@ -1,8 +1,8 @@
 {
   "format_version": 2,
   "header": {
-    "name": "Ultimate Gear: Divine Edition (RP)",
-    "description": "Divine Edition Phase 5 - Quality Assurance",
+    "name": "Ultimate Gear – Divine Resources",
+    "description": "Visual resource pack for Ultimate Gear: Divine Edition featuring custom Divine Book icons and Celestial Fantasy UI theme.",
     "uuid": "de0b4052-6fc6-4136-84bc-100f51fdcba0",
     "version": [1, 0, 4],
     "min_engine_version": [1, 20, 50]

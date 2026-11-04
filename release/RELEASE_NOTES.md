@@ -5,8 +5,8 @@
 - **Version**: v1.0.4
 - **Target Platform**: Minecraft Bedrock Edition (Android / Windows)
 - **File Name**: `Ultimate-Gear-Divine-v1.0.4.mcaddon`
-- **File Size**: `0.01 MB`
-- **SHA256 Checksum**: `5122287ad03ca6b3a53e9fab9dcacc584422f8e50648e089aa22d0b7dc1c5eb0`
+- **File Size**: `0.03 MB`
+- **SHA256 Checksum**: `094a01738cf85e7704172242ef5851048d165802d610d00d3a88b61673411294`
 
 ## Features & Highlights
 1. **Divine Book**: Automatically received on first join; reusable UI trigger.
