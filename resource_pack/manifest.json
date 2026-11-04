@@ -1,0 +1,17 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Ultimate Gear: Divine Edition (RP)",
+    "description": "Divine Edition Phase 1 - Resource Pack",
+    "uuid": "de0b4052-6fc6-4136-84bc-100f51fdcba0",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 50]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "4c42dfa2-3ff7-473e-85ce-528d10825b12",
+      "version": [1, 0, 0]
+    }
+  ]
+}

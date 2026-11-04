@@ -1,0 +1,34 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Ultimate Gear: Divine Edition (BP)",
+    "description": "Divine Edition Phase 1 - Manual Item Selection System",
+    "uuid": "218317cb-87a0-4903-95bb-3ec69091c0a0",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 50]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "6a31fe36-974c-41e8-8fc5-a5b05ed43311",
+      "version": [1, 0, 0]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "5ba27c33-3310-4c8e-8057-f9cf9c8164ed",
+      "version": [1, 0, 0],
+      "entry": "scripts/index.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.16.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "1.3.0"
+    }
+  ]
+}
