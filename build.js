@@ -59,7 +59,7 @@ if (!fs.existsSync(releaseDir)) {
   fs.mkdirSync(releaseDir, { recursive: true });
 }
 
-const addonFilename = 'Ultimate-Gear-Divine-v1.0.4.mcaddon';
+const addonFilename = 'Ultimate-Gear-Divine-v1.0.5.mcaddon';
 const addonPath = path.join(releaseDir, addonFilename);
 
 // Create .mcaddon containing both behavior_pack and resource_pack directories
@@ -89,11 +89,11 @@ const sha256Content = `${sha256}  ${addonFilename}\n`;
 fs.writeFileSync(path.join(releaseDir, 'SHA256SUMS.txt'), sha256Content);
 console.log(`  [OK] SHA256: ${sha256}`);
 
-const releaseNotesContent = `# Ultimate Gear: Divine Edition v1.0.4 Release Notes
+const releaseNotesContent = `# Ultimate Gear: Divine Edition v1.0.5 Release Notes
 
 ## Overview
 - **Addon Name**: Ultimate Gear: Divine Edition
-- **Version**: v1.0.4
+- **Version**: v1.0.5
 - **Target Platform**: Minecraft Bedrock Edition (Android / Windows)
 - **File Name**: \`${addonFilename}\`
 - **File Size**: \`${fileSizeMB} MB\`
@@ -103,8 +103,8 @@ const releaseNotesContent = `# Ultimate Gear: Divine Edition v1.0.4 Release Note
 1. **Divine Book**: Automatically received on first join; reusable UI trigger.
 2. **Inventory Selector**: Scans all inventory slots, ignores empty slots, features pagination and item info view.
 3. **Native Enchantment Engine**: Supports Armor and Tools with custom enchantment levels up to 255 using stable Script API.
-4. **Divine Visual Identity**: Celestial Fantasy theme (Gold, Dark Purple, White) with custom PNG book texture.
-5. **Quality Assurance**: Fully audited manifests, unique UUIDs, and robust error handling.
+4. **Visual Enchantment & Custom Naming**: Minecraft enchanted glint and custom naming (\`Divine\` / \`Celestial\`) for processed equipment.
+5. **Pack Identity Icon**: Vanilla enchanted book representation for behavior and resource pack icons.
 
 ## Installation Instructions (Android)
 1. Download \`${addonFilename}\`.

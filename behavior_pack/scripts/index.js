@@ -45,6 +45,26 @@ function getEquipmentType(item) {
   return "§cNot Compatible (No Enchantments)";
 }
 
+// Helper: Get custom divine / celestial item name
+function getDivineItemName(item) {
+  const typeId = item.typeId;
+  const cleanId = typeId.replace("minecraft:", "");
+  const currentName = item.nameTag || "";
+
+  if (currentName.includes("Divine ") || currentName.includes("Celestial ")) {
+    return currentName;
+  }
+
+  const parts = cleanId.split("_");
+  const formattedBase = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
+
+  if (cleanId.includes("netherite") || cleanId.includes("gold") || cleanId.includes("nether_star")) {
+    return `§6Divine ${formattedBase}`;
+  } else {
+    return `§bCelestial ${formattedBase}`;
+  }
+}
+
 // Helper: Read all installed enchantments safely
 function getInstalledEnchantmentsText(item) {
   try {
@@ -160,10 +180,10 @@ function openMainMenu(player) {
           openGeneralInfo(player, "Enchantment Settings", "Phase 3 Native Enchantment Engine is active. Select equipment to configure native enchantments up to level 255.");
           break;
         case 2:
-          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.2\nStable Script API mode active.");
+          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.5\nStable Script API mode active.");
           break;
         case 3:
-          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.2\nDeveloped for Minecraft Bedrock Android.\nFeatures Phase 3 Native Enchantments & Level 255 Engine.");
+          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.5\nDeveloped for Minecraft Bedrock Android.\nFeatures Visual Glint, Custom Naming & Level 255 Engine.");
           break;
       }
     }).catch((err) => {
@@ -448,7 +468,8 @@ function openItemConfigMenu(player, slotIndex, page) {
         }
       });
 
-      // Save back updated item securely to original slot
+      // Apply custom divine/celestial naming and save back updated item securely to original slot
+      freshItem.nameTag = getDivineItemName(freshItem);
       container.setItem(slotIndex, freshItem);
       
       if (errorCount === 0) {

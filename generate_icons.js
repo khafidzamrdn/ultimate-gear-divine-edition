@@ -27,27 +27,44 @@ function generatePNG(filePath) {
       const cx = x - 128;
       const cy = y - 128;
       const dist = Math.sqrt(cx * cx + cy * cy);
-      
-      // Divine Fantasy gradient: Dark Purple (#20063b) to Gold (#ffd700) with White glow (#ffffff)
-      let r = 0x20, g = 0x06, b = 0x3b, a = 0xff;
-      
-      if (dist < 90) {
-        const f = 1 - (dist / 90);
-        r = Math.floor(0x20 + (0xd4 - 0x20) * f);
-        g = Math.floor(0x06 + (0xaf - 0x06) * f);
-        b = Math.floor(0x3b + (0x37 - 0x3b) * f);
-      }
-      
-      if (dist < 35) {
-        const f = 1 - (dist / 35);
-        r = Math.floor(r + (0xff - r) * f);
-        g = Math.floor(g + (0xff - g) * f);
-        b = Math.floor(b + (0xff - b) * f);
-      }
 
-      // Sword / Cross divine symbol geometry
-      if (Math.abs(x - 128) < 8 || Math.abs(y - 128) < 8 || Math.abs(x - y) < 10 || Math.abs(x + y - 256) < 10) {
-        r = 0xff; g = 0xf0; b = 0x1f; // Bright Gold/White
+      // Enchanted Book Pack Icon (Deep purple cover, gold spine, glowing cyan/gold runes)
+      let r = 0x18, g = 0x08, b = 0x28, a = 0xff; // background dark
+
+      // Book body (rounded rectangle)
+      if (x >= 48 && x <= 208 && y >= 40 && y <= 216) {
+        // Cover color: Deep Enchanted Purple (#4a154b or #5c1d61)
+        r = 0x5c; g = 0x1d; b = 0x61;
+        
+        // Spine (left side around x = 48-64)
+        if (x >= 48 && x <= 64) {
+          r = 0x2c; g = 0x0c; b = 0x33;
+        }
+        
+        // Pages edge (right side around x = 196-208)
+        if (x >= 196 && x <= 208) {
+          r = 0xf0; g = 0xeb; b = 0xd8; // paper color
+        }
+        
+        // Golden Book Corners & Center Emblem
+        if ((x >= 52 && x <= 72 && (y <= 56 || y >= 200)) ||
+            (x >= 184 && x <= 204 && (y <= 56 || y >= 200)) ||
+            (Math.abs(x - 128) < 12 && Math.abs(y - 128) < 12)) {
+          r = 0xff; g = 0xd7; b = 0x00; // Gold
+        }
+
+        // Magical Glowing Runes / Sparkles (Cyan / Magenta)
+        if ((x + y) % 32 < 6 && (x * y) % 7 === 0) {
+          r = 0x00; g = 0xff; b = 0xff; // Cyan glow
+        }
+      } else {
+        // Radial background fade
+        if (dist < 110) {
+          const f = 1 - (dist / 110);
+          r = Math.floor(0x18 + (0x4a - 0x18) * f);
+          g = Math.floor(0x08 + (0x15 - 0x08) * f);
+          b = Math.floor(0x28 + (0x60 - 0x28) * f);
+        }
       }
 
       rawData[idx] = r;

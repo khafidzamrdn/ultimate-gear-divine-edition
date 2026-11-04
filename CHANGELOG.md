@@ -2,6 +2,12 @@
 
 All notable changes to **Ultimate Gear: Divine Edition** will be documented in this file.
 
+## [1.0.5] - 2026-03-06
+### Added
+- **Visual Enchantment (Glint)**: Minecraft enchanted glint effect applied to items successfully processed through the Divine Book without altering base stats or capabilities.
+- **Custom Item Naming**: Consistent naming convention assigning `Divine` (Netherite/Gold) and `Celestial` (Diamond/others) prefixes to processed equipment (e.g., `Divine Netherite Sword`, `Celestial Diamond Sword`), preventing duplicate names and preserving material identity.
+- **Pack Identity Icon**: Vanilla enchanted book representation (`textures/items/book_enchanted`) generated as `pack_icon.png` for both Behavior Pack and Resource Pack.
+
 ## [1.0.4] - 2026-03-06
 ### Added
 - **Quality Assurance Audit (Phase 5)**: Comprehensive audit report (`QA_REPORT.md`) covering source code validation, functional testing, texture verification, error handling, performance optimization, and packaging checks.

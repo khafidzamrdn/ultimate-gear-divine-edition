@@ -2,9 +2,9 @@
   "format_version": 2,
   "header": {
     "name": "Ultimate Gear – Divine Edition",
-    "description": "Advanced Script API behavior pack for Ultimate Gear featuring Divine Book, Inventory Selector, and Level 255 Native Enchantment Engine.",
+    "description": "Advanced Script API behavior pack for Ultimate Gear featuring Divine Book, Inventory Selector, Level 255 Enchantments, Visual Glint, and Custom Item Naming.",
     "uuid": "218317cb-87a0-4903-95bb-3ec69091c0a0",
-    "version": [1, 0, 4],
+    "version": [1, 0, 5],
     "min_engine_version": [1, 20, 50]
   },
   "modules": [

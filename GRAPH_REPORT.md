@@ -1,7 +1,7 @@
 # Code Knowledge Graph Report (GRAPH_REPORT.md)
 
 **Project**: Ultimate Gear: Divine Edition  
-**Version**: v1.0.4  
+**Version**: v1.0.5  
 **Environment**: Termux / OpenCode  
 **Output Directory**: `graphify-out/`  
 
