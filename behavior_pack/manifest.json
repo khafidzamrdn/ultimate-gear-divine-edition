@@ -2,9 +2,9 @@
   "format_version": 2,
   "header": {
     "name": "Ultimate Gear: Divine Edition (BP)",
-    "description": "Divine Edition Phase 4 - Divine Visual Identity",
+    "description": "Divine Edition Phase 5 - Quality Assurance",
     "uuid": "218317cb-87a0-4903-95bb-3ec69091c0a0",
-    "version": [1, 0, 3],
+    "version": [1, 0, 4],
     "min_engine_version": [1, 20, 50]
   },
   "modules": [
