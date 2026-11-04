@@ -7,10 +7,10 @@
     },
     "components": {
       "minecraft:icon": {
-        "texture": "enchanted_book"
+        "texture": "divine_book_icon"
       },
       "minecraft:display_name": {
-        "value": "§6Divine Book§r\n§7Ultimate Gear Menu"
+        "value": "§6§lDivine Book§r\n§5Ultimate Gear Menu"
       },
       "minecraft:max_stack_size": 1,
       "minecraft:use_animation": "eat",

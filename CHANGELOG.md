@@ -2,6 +2,11 @@
 
 All notable changes to **Ultimate Gear: Divine Edition** will be documented in this file.
 
+## [1.0.3] - 2026-03-06
+### Added
+- **Divine Visual Identity (Phase 4)**: Celestial Fantasy color theme (Gold `§6`, Dark Purple `§5`, White `§f`) consistently applied across all menus and UI headers.
+- **Custom Divine Book Texture**: Added dedicated PNG texture asset (`divine_book.png`) and `item_texture.json` mapping to eliminate all missing texture issues.
+
 ## [1.0.2] - 2026-03-06
 ### Added
 - **Native Enchantment Engine (Phase 3)**: Fully integrated `ItemEnchantableComponent` with `addEnchantment`, `removeEnchantment`, `getEnchantment`, and `canAddEnchantment`.

@@ -2,9 +2,9 @@
   "format_version": 2,
   "header": {
     "name": "Ultimate Gear: Divine Edition (RP)",
-    "description": "Divine Edition Phase 3 - Resource Pack",
+    "description": "Divine Edition Phase 4 - Divine Visual Identity",
     "uuid": "de0b4052-6fc6-4136-84bc-100f51fdcba0",
-    "version": [1, 0, 2],
+    "version": [1, 0, 3],
     "min_engine_version": [1, 20, 50]
   },
   "modules": [
