@@ -233,10 +233,10 @@ function openMainMenu(player) {
           openGeneralInfo(player, "Enchantment Settings", "Phase 3 Native Enchantment Engine is active. Select equipment to configure native enchantments up to level 255.");
           break;
         case 2:
-          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.6\nStable Script API mode active.");
+          openGeneralInfo(player, "General Settings", "Ultimate Gear Divine Edition v1.0.7\nStable Script API mode active.");
           break;
         case 3:
-          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.6\nDeveloped for Minecraft Bedrock Android.\nFeatures Visual Glint, Custom Naming & Level 255 Engine.");
+          openGeneralInfo(player, "About Ultimate Gear", "Ultimate Gear: Divine Edition v1.0.7\nDeveloped for Minecraft Bedrock Android.\nFeatures Visual Glint, Custom Naming & Level 255 Engine.");
           break;
       }
     }).catch((err) => {

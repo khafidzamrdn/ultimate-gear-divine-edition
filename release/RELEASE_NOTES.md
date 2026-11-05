@@ -1,12 +1,12 @@
-# Ultimate Gear: Divine Edition v1.0.6 Release Notes
+# Ultimate Gear: Divine Edition v1.0.7 Release Notes
 
 ## Overview
 - **Addon Name**: Ultimate Gear: Divine Edition
-- **Version**: v1.0.6
+- **Version**: v1.0.7
 - **Target Platform**: Minecraft Bedrock Edition (Android / Windows)
-- **File Name**: `Ultimate-Gear-Divine-v1.0.6.mcaddon`
+- **File Name**: `Ultimate-Gear-Divine-v1.0.7.mcaddon`
 - **File Size**: `0.02 MB`
-- **SHA256 Checksum**: `58e35af30cb5642c958e06f9c0771f834680cba364f5db413d71e1db26e8415f`
+- **SHA256 Checksum**: `12bf83d5a402fa5d80d5e1fdd2185ff57077f36a4bf681ffd384aed9fd5e659c`
 
 ## Features & Highlights
 1. **Divine Book**: Automatically received on first join; reusable UI trigger.
@@ -19,8 +19,9 @@
 1. **Divine Book Texture**: Regenerated a valid 16x16 enchanted book PNG (the previous file was truncated/corrupt).
 2. **Visual Glint**: Processed equipment now reliably renders the Minecraft enchantment glint (existing enchantments preserved; cosmetic fallback added only when none are present).
 3. **Processed State**: Item stack marker keeps the processed status across inventory moves, storage, and logout/login.
+4. **Version Labels**: Pack names and descriptions now include the version so the correct pack is easy to identify in-game.
 
 ## Installation Instructions (Android)
-1. Download `Ultimate-Gear-Divine-v1.0.6.mcaddon`.
+1. Download `Ultimate-Gear-Divine-v1.0.7.mcaddon`.
 2. Tap the file to import into Minecraft Bedrock.
 3. Enable Behavior Pack and Resource Pack in world settings.

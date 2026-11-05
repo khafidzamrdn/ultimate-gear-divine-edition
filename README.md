@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![GitHub Release](https://img.shields.io/github/v/release/khafidzamrdn/ultimate-gear-divine-edition?style=for-the-badge)
 
-**Ultimate Gear: Divine Edition v1.0.6** is a powerful Minecraft Bedrock Edition addon designed for Android and other supported platforms. It introduces advanced item management, manual inventory inspection (Phase 2), Native Enchantment Engine supporting custom enchantment levels up to 255 (Phase 3), Divine Visual Identity with custom textures (Phase 4), Visual Glint & Custom Item Naming (v1.0.5), plus texture and glint bug fixes (v1.0.6).
+**Ultimate Gear: Divine Edition v1.0.7** is a powerful Minecraft Bedrock Edition addon designed for Android and other supported platforms. It introduces advanced item management, manual inventory inspection (Phase 2), Native Enchantment Engine supporting custom enchantment levels up to 255 (Phase 3), Divine Visual Identity with custom textures (Phase 4), Visual Glint & Custom Item Naming (v1.0.5), plus texture and glint bug fixes and clear version labels (v1.0.6–v1.0.7).
 
 ---
 

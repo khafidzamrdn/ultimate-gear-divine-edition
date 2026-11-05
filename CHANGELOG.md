@@ -2,6 +2,10 @@
 
 All notable changes to **Ultimate Gear: Divine Edition** will be documented in this file.
 
+## [1.0.7] - 2026-11-05
+### Changed
+- **Version Labels**: Pack names now include the version (e.g. `Ultimate Gear – Divine Edition v1.0.7` and `Ultimate Gear – Divine Resources v1.0.7`), and descriptions start with `v1.0.7`, so the correct pack version is visible in Minecraft's pack selection screen.
+
 ## [1.0.6] - 2026-11-04
 ### Fixed
 - **Divine Book Texture**: Regenerated `resource_pack/textures/items/divine_book.png` as a valid 16x16 enchanted book PNG (previous file was truncated and corrupted).

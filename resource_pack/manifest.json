@@ -1,10 +1,10 @@
 {
   "format_version": 2,
   "header": {
-    "name": "Ultimate Gear – Divine Resources",
-    "description": "Visual resource pack for Ultimate Gear: Divine Edition featuring vanilla enchanted book pack icons and Celestial Fantasy UI theme.",
+    "name": "Ultimate Gear – Divine Resources v1.0.7",
+    "description": "v1.0.7 | Visual resource pack for Ultimate Gear: Divine Edition featuring vanilla enchanted book pack icons and Celestial Fantasy UI theme.",
     "uuid": "de0b4052-6fc6-4136-84bc-100f51fdcba0",
-    "version": [1, 0, 6],
+    "version": [1, 0, 7],
     "min_engine_version": [1, 20, 50]
   },
   "modules": [
